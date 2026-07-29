@@ -1,0 +1,44 @@
+﻿@model Smart_Employee_Management_System.Models.Worker
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+@{
+    ViewData["Title"] = "Add Worker";
+}
+
+<h2>Add Worker</h2>
+
+    <div class="mb-3">
+        <label>Full Name</label>
+        <input asp-for="FullName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Mobile Number</label>
+        <input asp-for="MobileNumber" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Address</label>
+        <input asp-for="Address" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Category</label>
+        <select asp-for="CategoryId" class="form-control">
+            @foreach (var item in ViewBag.Categories)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+
+</form>

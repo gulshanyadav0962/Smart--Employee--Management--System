@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Smart_Employee_Management_System.Models.Payment>
+
+@{
+    ViewData["Title"] = "Payment List";
+}
+
+<h2>Payment List</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add Payment</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>Amount</th>
+            <th>Payment Method</th>
+            <th>Payment Status</th>
+            <th>Transaction ID</th>
+            <th>Payment Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.BookingId</td>
+                <td>@item.Amount</td>
+                <td>@item.PaymentMethod</td>
+                <td>@item.PaymentStatus</td>
+                <td>@item.TransactionId</td>
+                <td>@item.PaymentDate.ToShortDateString()</td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a>
+
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

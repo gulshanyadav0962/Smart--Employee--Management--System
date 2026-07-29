@@ -1,0 +1,36 @@
+﻿@model Smart_Employee_Management_System.Models.Booking
+
+<h2>Delete Booking</h2>
+
+<h3>Are you sure you want to delete this booking?</h3>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Customer</th>
+        <td>@Model.Customer?.FullName</td>
+    </tr>
+    <tr>
+        <th>Worker</th>
+        <td>@Model.Worker?.FullName</td>
+    </tr>
+    <tr>
+        <th>Booking Date</th>
+        <td>@Model.BookingDate.ToShortDateString()</td>
+    </tr>
+    <tr>
+        <th>Work Date</th>
+        <td>@Model.WorkDate.ToShortDateString()</td>
+    </tr>
+    <tr>
+        <th>Status</th>
+        <td>@Model.Status</td>
+    </tr>
+</table>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">Delete</button>
+
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

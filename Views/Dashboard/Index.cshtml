@@ -1,0 +1,548 @@
+﻿@model Smart_Employee_Management_System.ViewModels.DashboardVM
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<div class="container-fluid mt-4">
+
+    <h2 class="mb-4 fw-bold">
+        <i class="fa-solid fa-gauge-high"></i>
+        Admin Dashboard
+    </h2>
+
+    <div class="row">
+
+        <!-- Workers -->
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card text-white bg-primary shadow">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h6>Total Workers</h6>
+
+                            <h2>@Model.TotalWorkers</h2>
+
+                        </div>
+
+                        <i class="fa-solid fa-user-gear fa-3x"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Customers -->
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card text-white bg-success shadow">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h6>Total Customers</h6>
+
+                            <h2>@Model.TotalCustomers</h2>
+
+                        </div>
+
+                        <i class="fa-solid fa-users fa-3x"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Bookings -->
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card text-white bg-warning shadow">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h6>Total Bookings</h6>
+
+                            <h2>@Model.TotalBookings</h2>
+
+                        </div>
+
+                        <i class="fa-solid fa-calendar-check fa-3x"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Payments -->
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card text-white bg-danger shadow">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h6>Total Payments</h6>
+
+                            <h2>@Model.TotalPayments</h2>
+
+                        </div>
+
+                        <i class="fa-solid fa-credit-card fa-3x"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Reviews -->
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card text-white bg-info shadow">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h6>Total Reviews</h6>
+
+                            <h2>@Model.TotalReviews</h2>
+
+                        </div>
+
+                        <i class="fa-solid fa-star fa-3x"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Revenue -->
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card text-white bg-dark shadow">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h6>Total Revenue</h6>
+
+                            <h2>₹ @Model.TotalRevenue</h2>
+
+                        </div>
+
+                        <i class="fa-solid fa-indian-rupee-sign fa-3x"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row mt-4">
+
+    <!-- Recent Bookings -->
+
+    <div class="col-lg-6 mb-4">
+
+        <div class="card shadow">
+
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    Recent Bookings
+                </h5>
+            </div>
+
+            <div class="card-body table-responsive">
+
+                <table class="table table-bordered table-hover">
+
+                    <thead class="table-light">
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Worker</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model.RecentBookings)
+                        {
+                            <tr>
+
+                                <td>@item.Id</td>
+
+                                <td>@item.Customer?.FullName</td>
+
+                                <td>@item.Worker?.FullName</td>
+
+                                <td>
+
+                                    @if (item.Status == "Completed")
+                                    {
+                                        <span class="badge bg-success">@item.Status</span>
+                                    }
+                                    else if (item.Status == "Pending")
+                                    {
+                                        <span class="badge bg-warning text-dark">@item.Status</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">@item.Status</span>
+                                    }
+
+                                </td>
+
+                                <td>@item.BookingDate.ToShortDateString()</td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Recent Payments -->
+
+    <div class="col-lg-6 mb-4">
+
+        <div class="card shadow">
+
+            <div class="card-header bg-success text-white">
+
+                <h5 class="mb-0">
+
+                    <i class="fa-solid fa-credit-card"></i>
+
+                    Recent Payments
+
+                </h5>
+
+            </div>
+
+            <div class="card-body table-responsive">
+
+                <table class="table table-bordered table-hover">
+
+                    <thead class="table-light">
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Amount</th>
+
+                            <th>Method</th>
+
+                            <th>Status</th>
+
+                            <th>Date</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model.RecentPayments)
+                        {
+                            <tr>
+
+                                <td>@item.Id</td>
+
+                                <td>₹ @item.Amount</td>
+
+                                <td>@item.PaymentMethod</td>
+
+                                <td>
+
+                                    @if (item.PaymentStatus == "Paid")
+                                    {
+                                        <span class="badge bg-success">@item.PaymentStatus</span>
+                                    }
+                                    else if (item.PaymentStatus == "Pending")
+                                    {
+                                        <span class="badge bg-warning text-dark">@item.PaymentStatus</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">@item.PaymentStatus</span>
+                                    }
+
+                                </td>
+
+                                <td>@item.PaymentDate.ToShortDateString()</td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="row">
+
+    <!-- Recent Reviews -->
+
+    <div class="col-12">
+
+        <div class="card shadow">
+
+            <div class="card-header bg-info text-white">
+
+                <h5 class="mb-0">
+
+                    <i class="fa-solid fa-star"></i>
+
+                    Latest Reviews
+
+                </h5>
+
+            </div>
+
+            <div class="card-body table-responsive">
+
+                <table class="table table-bordered table-hover">
+
+                    <thead class="table-light">
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Customer</th>
+
+                            <th>Worker</th>
+
+                            <th>Rating</th>
+
+                            <th>Comment</th>
+
+                            <th>Date</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model.RecentReviews)
+                        {
+                            <tr>
+
+                                <td>@item.Id</td>
+
+                                @item.Customer?.FullName
+                                @item.Worker?.FullName
+
+                                <td>
+
+                                    @for (int i = 1; i <= item.Rating; i++)
+                                    {
+                                        <i class="fa-solid fa-star text-warning"></i>
+                                    }
+
+                                </td>
+
+                                <td>@item.Comment</td>
+
+                                <td>@item.ReviewDate.ToShortDateString()</td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row mt-4">
+
+    <div class="col-lg-6 mb-4">
+
+        <div class="card shadow">
+
+            <div class="card-header bg-success text-white">
+
+                <h5>
+                    Monthly Revenue
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <canvas id="revenueChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-6 mb-4">
+
+        <div class="card shadow">
+
+            <div class="card-header bg-primary text-white">
+
+                <h5>
+                    Monthly Bookings
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <canvas id="bookingChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+@section Scripts {
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+        const months=@Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Months));
+
+        const revenue=@Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.MonthlyRevenue));
+
+        const bookings=@Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.MonthlyBookings));
+
+        new Chart(document.getElementById('revenueChart'),{
+
+        type:'line',
+
+        data:{
+
+        labels:months,
+
+        datasets:[{
+
+        label:'Revenue',
+
+        data:revenue,
+
+        borderWidth:3,
+
+        fill:true,
+
+        tension:.4
+
+        }]
+
+        }
+
+        });
+
+        new Chart(document.getElementById('bookingChart'),{
+
+        type:'bar',
+
+        data:{
+
+        labels:months,
+
+        datasets:[{
+
+        label:'Bookings',
+
+        data:bookings,
+
+        borderWidth:1
+
+        }]
+
+        }
+
+        });
+
+    </script>
+
+}

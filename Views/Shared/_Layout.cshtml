@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Smart Employee Management System</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        body {
+            background: #f4f6f9;
+        }
+
+        .navbar {
+            background: #212529 !important;
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        .sidebar {
+            min-height: 100vh;
+            background: #343a40;
+        }
+
+            .sidebar a {
+                color: white;
+                padding: 12px 20px;
+                display: block;
+                text-decoration: none;
+                transition: .3s;
+            }
+
+                .sidebar a:hover {
+                    background: #0d6efd;
+                    padding-left: 28px;
+                }
+
+        .content {
+            padding: 25px;
+        }
+
+        .footer {
+            background: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    @{
+        bool hideLayout =
+        ViewContext.RouteData.Values["Controller"]?.ToString() == "Account";
+    }
+
+    @if (!hideLayout)
+    {
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+
+            <div class="container-fluid">
+
+                <a class="navbar-brand"
+                   asp-controller="Dashboard"
+                   asp-action="Index">
+
+                    <i class="fa-solid fa-users-gear"></i>
+                    Smart Employee Management System
+
+                </a>
+
+                <ul class="navbar-nav ms-auto flex-row align-items-center">
+
+                    @if (User.Identity != null && User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item me-3">
+                            <span class="text-white">
+                                <i class="fa-solid fa-user"></i>
+                                @User.Identity.Name
+                            </span>
+                        </li>
+
+                        <li class="nav-item">
+                            <a asp-controller="Account"
+                               asp-action="Logout"
+                               class="btn btn-danger btn-sm">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                Logout
+                            </a>
+                        </li>
+                    }
+
+                </ul>
+
+            </div>
+
+        </nav>
+
+        <!-- Main Layout -->
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <!-- Sidebar -->
+
+                <div class="col-md-2 sidebar">
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-controller="Dashboard" asp-action="Index">
+                            <i class="fa-solid fa-gauge-high"></i> Dashboard
+                        </a>
+
+                        <a asp-controller="Category" asp-action="Index">
+                            <i class="fa-solid fa-layer-group"></i> Categories
+                        </a>
+
+                        <a asp-controller="Worker" asp-action="Index">
+                            <i class="fa-solid fa-user-gear"></i> Workers
+                        </a>
+
+                        <a asp-controller="Customer" asp-action="Index">
+                            <i class="fa-solid fa-users"></i> Customers
+                        </a>
+
+                        <a asp-controller="Booking" asp-action="Index">
+                            <i class="fa-solid fa-calendar-check"></i> Bookings
+                        </a>
+
+                        <a asp-controller="Payment" asp-action="Index">
+                            <i class="fa-solid fa-credit-card"></i> Payments
+                        </a>
+
+                        <a asp-controller="Review" asp-action="Index">
+                            <i class="fa-solid fa-star"></i> Reviews
+                        </a>
+                    }
+
+                    else if (User.IsInRole("Worker"))
+                    {
+                        <a asp-controller="WorkerDashboard" asp-action="Index">
+                            <i class="fa-solid fa-gauge-high"></i> Dashboard
+                        </a>
+
+                        <a asp-controller="WorkerDashboard" asp-action="Index">
+                            <i class="fa-solid fa-calendar-check"></i> My Bookings
+                        </a>
+                    }
+
+                    else if (User.IsInRole("Customer"))
+                    {
+                        <a asp-controller="CustomerDashboard" asp-action="Index">
+                            <i class="fa-solid fa-gauge-high"></i> Dashboard
+                        </a>
+
+                        <a asp-controller="CustomerDashboard" asp-action="FindWorker">
+                            <i class="fa-solid fa-magnifying-glass"></i> Find Worker
+                        </a>
+
+                        <a asp-controller="Booking" asp-action="MyBookings">
+                            <i class="fa-solid fa-calendar-check"></i> My Bookings
+                        </a>
+
+                        <a asp-controller="Review" asp-action="MyReviews">
+                            <i class="fa-solid fa-star"></i> My Reviews
+                        </a>
+                    }
+
+                    <hr class="text-light" />
+
+                    <a asp-controller="Home" asp-action="Index">
+                        <i class="fa-solid fa-house"></i> Home
+                    </a>
+
+                </div>
+
+                <!-- Content -->
+
+                <div class="col-md-10 content">
+
+                    @RenderBody()
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+    else
+    {
+        <!-- Login/Register Layout -->
+        <div class="container mt-5">
+            @RenderBody()
+        </div>
+    }
+
+    <footer class="footer border-top">
+
+        <strong>
+            © @DateTime.Now.Year Smart Employee Management System
+        </strong>
+
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

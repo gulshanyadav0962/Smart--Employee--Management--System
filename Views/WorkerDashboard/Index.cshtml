@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Smart_Employee_Management_System.Models.Booking>
+
+@{
+    ViewData["Title"] = "Worker Dashboard";
+}
+
+<h2 class="mb-4">Worker Dashboard</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        No bookings available.
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Customer</th>
+                <th>Work Date</th>
+                <th>Address</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Customer?.FullName</td>
+                    <td>@item.WorkDate.ToString("dd-MM-yyyy")</td>
+                    <td>@item.Address</td>
+                    <td>@item.TotalAmount</td>
+
+                    <td>
+                        @if (item.Status == "Pending")
+                        {
+                            <span class="badge bg-warning text-dark">Pending</span>
+                        }
+                        else if (item.Status == "Accepted")
+                        {
+                            <span class="badge bg-success">Accepted</span>
+                        }
+                        else if (item.Status == "Rejected")
+                        {
+                            <span class="badge bg-danger">Rejected</span>
+                        }
+                        else if (item.Status == "Completed")
+                        {
+                            <span class="badge bg-primary">Completed</span>
+                        }
+                    </td>
+
+                    <td>
+                        @if (item.Status == "Pending")
+                        {
+                            <a asp-action="Accept"
+                               asp-route-id="@item.Id"
+                               class="btn btn-success btn-sm">
+                                Accept
+                            </a>
+
+                            <a asp-action="Reject"
+                               asp-route-id="@item.Id"
+                               class="btn btn-danger btn-sm">
+                                Reject
+                            </a>
+                        }
+                        else if (item.Status == "Accepted")
+                        {
+                            <a asp-action="Complete"
+                               asp-route-id="@item.Id"
+                               class="btn btn-primary btn-sm">
+                                Complete
+                            </a>
+                        }
+                        else
+                        {
+                            <span>-</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Smart_Employee_Management_System.Models.Booking>
+
+@{
+    ViewData["Title"] = "My Bookings";
+}
+
+<h2 class="mb-4">My Bookings</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        You have not made any bookings yet.
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Worker</th>
+                <th>Booking Date</th>
+                <th>Work Date</th>
+                <th>Address</th>
+                <th>Amount</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Worker?.FullName</td>
+                    <td>@item.BookingDate.ToString("dd-MM-yyyy")</td>
+                    <td>@item.WorkDate.ToString("dd-MM-yyyy")</td>
+                    <td>@item.Address</td>
+                    <td>₹ @item.TotalAmount</td>
+                    <td>
+                        @if (item.Status == "Pending")
+                        {
+                            <span class="badge bg-warning text-dark">Pending</span>
+                        }
+                        else if (item.Status == "Accepted")
+                        {
+                            <span class="badge bg-success">Accepted</span>
+                        }
+                        else if (item.Status == "Rejected")
+                        {
+                            <span class="badge bg-danger">Rejected</span>
+                        }
+                        else if (item.Status == "Completed")
+                        {
+                            <span class="badge bg-primary">Completed</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">@item.Status</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Customer Dashboard";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Welcome Customer</h2>
+
+    <div class="alert alert-success">
+        Customer Dashboard Successfully Created.
+    </div>
+
+    <div class="row mt-4">
+
+        <div class="col-md-4">
+            <a asp-controller="CustomerDashboard"
+               asp-action="FindWorker"
+               class="btn btn-primary w-100 p-3">
+                🔍 Find Worker
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a asp-controller="Booking"
+               asp-action="MyBookings"
+               class="btn btn-success w-100 p-3">
+                📋 My Bookings
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a asp-controller="Review"
+               asp-action="MyReviews"
+               class="btn btn-warning w-100 p-3">
+                ⭐ My Reviews
+            </a>
+        </div>
+
+    </div>
+
+</div>

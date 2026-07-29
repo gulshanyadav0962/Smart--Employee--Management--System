@@ -1,0 +1,70 @@
+﻿@model Smart_Employee_Management_System.Models.Payment
+
+@{
+    ViewData["Title"] = "Edit Payment";
+}
+
+<h2>Edit Payment</h2>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label>Booking</label>
+
+        <select asp-for="BookingId"
+                asp-items="ViewBag.Bookings"
+                class="form-control">
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Amount</label>
+        <input asp-for="Amount" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Payment Method</label>
+
+        <select asp-for="PaymentMethod" class="form-control">
+
+            <option>Cash</option>
+            <option>UPI</option>
+            <option>Card</option>
+            <option>Net Banking</option>
+
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Payment Status</label>
+
+        <select asp-for="PaymentStatus" class="form-control">
+
+            <option>Pending</option>
+            <option>Paid</option>
+            <option>Failed</option>
+
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Transaction ID</label>
+        <input asp-for="TransactionId" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Payment Date</label>
+        <input asp-for="PaymentDate" type="date" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Update Payment
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Back
+    </a>
+
+</form>

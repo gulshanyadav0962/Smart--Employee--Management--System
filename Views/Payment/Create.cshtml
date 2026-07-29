@@ -1,0 +1,326 @@
+﻿@model Smart_Employee_Management_System.Models.Payment
+
+@{
+    ViewData["Title"] = "Create Payment";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg">
+
+        <div class="card-header bg-primary text-white">
+            <h3>Create Payment</h3>
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Create" method="post">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <!-- Booking -->
+
+                <div class="mb-3">
+                    <input asp-for="BookingId" type="hidden" />
+                <!-- Amount -->
+
+                <div class="mb-3">
+                        <input asp-for="Amount"
+                               class="form-control"
+                               readonly />
+                </div>
+
+                <!-- Payment Method -->
+
+                <div class="mb-3">
+
+                    <label asp-for="PaymentMethod" class="form-label fw-bold">
+                        Payment Method
+                    </label>
+
+                    <select asp-for="PaymentMethod"
+                            class="form-select"
+                            id="paymentMethod">
+
+                        <option value="">-- Select Payment Method --</option>
+
+                        <option value="Cash">Cash</option>
+
+                        <option value="UPI">UPI</option>
+
+                        <option value="Debit Card">Debit Card</option>
+
+                        <option value="Credit Card">Credit Card</option>
+
+                        <option value="Net Banking">Net Banking</option>
+
+                    </select>
+
+                </div>
+
+                <!-- ========================= -->
+                <!-- UPI -->
+                <!-- ========================= -->
+
+                <div id="upiSection" style="display:none;">
+
+                    <div class="card border-success mb-3">
+
+                        <div class="card-header bg-success text-white">
+                            UPI Details
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="mb-3">
+
+                                <label asp-for="UpiId"></label>
+
+                                <input asp-for="UpiId"
+                                       class="form-control"
+                                       placeholder="example@upi" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ========================= -->
+                <!-- Card -->
+                <!-- ========================= -->
+
+                <div id="cardSection" style="display:none;">
+
+                    <div class="card border-primary mb-3">
+
+                        <div class="card-header bg-primary text-white">
+                            Card Details
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="mb-3">
+
+                                <label asp-for="CardHolderName"></label>
+
+                                <input asp-for="CardHolderName"
+                                       class="form-control"
+                                       placeholder="Card Holder Name" />
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label asp-for="CardNumber"></label>
+
+                                <input asp-for="CardNumber"
+                                       class="form-control"
+                                       maxlength="16"
+                                       placeholder="1234567812345678" />
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+
+                                    <label asp-for="ExpiryDate"></label>
+
+                                    <input asp-for="ExpiryDate"
+                                           class="form-control"
+                                           placeholder="MM/YY" />
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <label asp-for="CVV"></label>
+
+                                    <input asp-for="CVV"
+                                           class="form-control"
+                                           maxlength="3"
+                                           placeholder="123" />
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ========================= -->
+                <!-- Net Banking -->
+                <!-- ========================= -->
+
+                <div id="bankSection" style="display:none;">
+
+                    <div class="card border-warning mb-3">
+
+                        <div class="card-header bg-warning">
+                            Net Banking
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="mb-3">
+
+                                <label asp-for="BankName"></label>
+
+                                <input asp-for="BankName"
+                                       class="form-control"
+                                       placeholder="Bank Name" />
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label asp-for="AccountNumber"></label>
+
+                                <input asp-for="AccountNumber"
+                                       class="form-control"
+                                       placeholder="Account Number" />
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label asp-for="IFSCCode"></label>
+
+                                <input asp-for="IFSCCode"
+                                       class="form-control"
+                                       placeholder="SBIN0001234" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Transaction -->
+
+                @* <div id="transactionSection" style="display:none;">
+
+                    <div class="mb-3">
+
+                        <label asp-for="TransactionId"></label>
+
+                        <input asp-for="TransactionId"
+                               class="form-control"
+                               placeholder="Transaction ID" />
+
+                    </div>
+
+                </div> *@
+
+                <!-- Payment Status -->
+
+                @* <div class="mb-3">
+
+                    <label asp-for="PaymentStatus"></label>
+
+                    <select asp-for="PaymentStatus" class="form-select">
+
+                        <option value="Pending">Pending</option>
+
+                        <option value="Paid">Paid</option>
+
+                        <option value="Failed">Failed</option>
+
+                    </select>
+
+                </div> *@
+
+                <!-- Payment Date -->
+
+                @* <div class="mb-3">
+
+                    <label asp-for="PaymentDate"></label>
+
+                    <input asp-for="PaymentDate"
+                           type="date"
+                           class="form-control" />
+
+                </div> *@
+
+                <button class="btn btn-success">
+                        Pay Now
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    Back
+
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+
+        const payment=document.getElementById("paymentMethod");
+
+        const upi=document.getElementById("upiSection");
+
+        const card=document.getElementById("cardSection");
+
+        const bank=document.getElementById("bankSection");
+
+        const transaction=document.getElementById("transactionSection");
+
+        function loadFields(){
+
+        upi.style.display="none";
+        card.style.display="none";
+        bank.style.display="none";
+        transaction.style.display="none";
+
+        if(payment.value==="UPI"){
+
+        upi.style.display="block";
+        transaction.style.display="block";
+
+        }
+
+        else if(payment.value==="Debit Card" || payment.value==="Credit Card"){
+
+        card.style.display="block";
+        transaction.style.display="block";
+
+        }
+
+        else if(payment.value==="Net Banking"){
+
+        bank.style.display="block";
+        transaction.style.display="block";
+
+        }
+
+        }
+
+        payment.addEventListener("change",loadFields);
+
+        loadFields();
+
+    </script>
+
+}

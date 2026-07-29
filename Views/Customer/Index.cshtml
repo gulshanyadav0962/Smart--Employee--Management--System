@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Smart_Employee_Management_System.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customer List";
+}
+
+<h2>Customer List</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add Customer</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Mobile Number</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>City</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FullName</td>
+                <td>@item.MobileNumber</td>
+                <td>@item.Email</td>
+                <td>@item.Address</td>
+                <td>@item.City</td>
+            </tr>
+        }
+    </tbody>
+</table>

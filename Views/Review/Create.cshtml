@@ -1,0 +1,43 @@
+﻿@model Smart_Employee_Management_System.Models.Review
+
+@{
+    ViewData["Title"] = "Create Review";
+}
+
+<h2>Create Review</h2>
+
+<form asp-action="Create" method="post">
+
+    <div class="mb-3">
+        <label>Customer</label>
+        <select asp-for="CustomerId" asp-items="ViewBag.Customers" class="form-control">
+            <option value="">-- Select Customer --</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Worker</label>
+        <select asp-for="WorkerId" asp-items="ViewBag.Workers" class="form-control">
+            <option value="">-- Select Worker --</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Rating (1-10)</label>
+        <input asp-for="Rating" type="number" min="1" max="10" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Comment</label>
+        <textarea asp-for="Comment" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Review Date</label>
+        <input asp-for="ReviewDate" type="date" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Save Review</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+
+</form>

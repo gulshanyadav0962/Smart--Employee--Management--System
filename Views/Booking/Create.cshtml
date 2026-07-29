@@ -1,0 +1,60 @@
+﻿@model Smart_Employee_Management_System.ViewModels.BookingCreateVM
+
+@{
+    ViewData["Title"] = "Book Worker";
+}
+
+<div class="container mt-4">
+
+    <h2>Book Worker</h2>
+
+    <form asp-action="Create" method="post">
+
+        <input asp-for="WorkerId" type="hidden" />
+
+        <div class="mb-3">
+            <label class="form-label">Worker Name</label>
+            <input asp-for="WorkerName" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="WorkDate" class="form-label"></label>
+            <input asp-for="WorkDate" class="form-control" type="date" />
+            <span asp-validation-for="WorkDate" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label"></label>
+            <textarea asp-for="Address" class="form-control"></textarea>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="TotalAmount" class="form-label"></label>
+            <input asp-for="TotalAmount" class="form-control" />
+            <span asp-validation-for="TotalAmount" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Confirm Booking
+        </button>
+
+        <a asp-controller="CustomerDashboard"
+           asp-action="FindWorker"
+           class="btn btn-secondary">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

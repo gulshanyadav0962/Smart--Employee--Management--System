@@ -1,0 +1,41 @@
+﻿@model Smart_Employee_Management_System.Models.Review
+
+@{
+    ViewData["Title"] = "Edit Review";
+}
+
+<h2>Edit Review</h2>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label>Customer</label>
+        <select asp-for="CustomerId" asp-items="ViewBag.Customers" class="form-control"></select>
+    </div>
+
+    <div class="mb-3">
+        <label>Worker</label>
+        <select asp-for="WorkerId" asp-items="ViewBag.Workers" class="form-control"></select>
+    </div>
+
+    <div class="mb-3">
+        <label>Rating</label>
+        <input asp-for="Rating" type="number" min="1" max="5" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Comment</label>
+        <textarea asp-for="Comment" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Review Date</label>
+        <input asp-for="ReviewDate" type="date" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Update Review</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+
+</form>
