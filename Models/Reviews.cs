@@ -6,6 +6,7 @@ namespace Smart_Employee_Management_System.Models
     {
         public int Id { get; set; }
 
+        
         // Customer
         public int CustomerId { get; set; }
         public Customer? Customer { get; set; }
@@ -22,5 +23,7 @@ namespace Smart_Employee_Management_System.Models
 
         // Review Date
         public DateTime ReviewDate { get; set; } = DateTime.Now;
+
+
     }
 }

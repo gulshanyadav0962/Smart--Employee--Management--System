@@ -156,7 +156,9 @@ namespace Smart_Employee_Management_System.Controllers
 
             return View(booking);
         }
-
+        //========================================
+        // POst Method [Delete]
+        //=======================================
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -172,7 +174,9 @@ namespace Smart_Employee_Management_System.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
+        // =====================================================
+        // My Booking 
+        //=================================================================
         [Authorize(Roles = "Customer")]
         public async Task<IActionResult> MyBookings()
         {
@@ -188,13 +192,19 @@ namespace Smart_Employee_Management_System.Controllers
 
             var bookings = await _context.Bookings
                 .Include(b => b.Worker)
+                .Include(b => b.Payment)   // <-- Add this line
                 .Where(b => b.CustomerId == customer.Id)
                 .OrderByDescending(b => b.BookingDate)
                 .ToListAsync();
 
+          var paidBookingIds = await _context.Payments
+            .Where(p => p.PaymentStatus == "Paid")
+            .Select(p => p.BookingId)
+            .ToListAsync();
+
+            ViewBag.PaidBookings = paidBookingIds;
+
             return View(bookings);
         }
-
     }
-
 }

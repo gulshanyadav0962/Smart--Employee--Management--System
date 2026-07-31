@@ -23,7 +23,10 @@ namespace Smart_Employee_Management_System.Models
 
         public string Status { get; set; } = "Pending";
 
+        // Payment ===
+        public Payment? Payment { get; set; }
         public decimal TotalAmount { get; set; }
+
 
         public string? Description { get; set; }
     }

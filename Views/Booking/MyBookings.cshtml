@@ -23,6 +23,7 @@ else
                 <th>Address</th>
                 <th>Amount</th>
                 <th>Status</th>
+                <th>Action</th>
             </tr>
         </thead>
 
@@ -56,6 +57,52 @@ else
                         {
                             <span class="badge bg-secondary">@item.Status</span>
                         }
+                    </td>
+                    <td>
+                        @{
+                            var paidBookings = ViewBag.PaidBookings as List<int>;
+                        }
+
+                    <td>
+                        @if (item.Status == "Completed")
+                        {
+                            if (paidBookings != null && paidBookings.Contains(item.Id))
+                            {
+                                @if (paidBookings != null && paidBookings.Contains(item.Id))
+                                {
+                                    <a asp-controller="Review"
+                                       asp-action="Create"
+                                       asp-route-bookingId="@item.Id"
+                                       class="btn btn-primary btn-sm">
+                                        Give Review
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Payment"
+                                       asp-action="Create"
+                                       asp-route-bookingId="@item.Id"
+                                       class="btn btn-success btn-sm">
+                                        Pay Now
+                                    </a>
+                                }
+               
+                            }
+                            else
+                            {
+                                <a asp-controller="Payment"
+                                   asp-action="Create"
+                                   asp-route-bookingId="@item.Id"
+                                   class="btn btn-success btn-sm">
+                                    Pay Now
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <span>-</span>
+                        }
+                    </td>
                     </td>
                 </tr>
             }

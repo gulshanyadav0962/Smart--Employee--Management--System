@@ -260,7 +260,7 @@ namespace Smart_Employee_Management_System.Migrations
 
                     b.HasIndex("WorkerId");
 
-                    b.ToTable("Bookings");
+                    b.ToTable("Bookings", (string)null);
                 });
 
             modelBuilder.Entity("Smart_Employee_Management_System.Models.Category", b =>
@@ -282,7 +282,7 @@ namespace Smart_Employee_Management_System.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Smart_Employee_Management_System.Models.Customer", b =>
@@ -319,7 +319,7 @@ namespace Smart_Employee_Management_System.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("Smart_Employee_Management_System.Models.Payment", b =>
@@ -378,7 +378,7 @@ namespace Smart_Employee_Management_System.Migrations
 
                     b.HasIndex("BookingId");
 
-                    b.ToTable("Payments");
+                    b.ToTable("Payments", (string)null);
                 });
 
             modelBuilder.Entity("Smart_Employee_Management_System.Models.Review", b =>
@@ -411,7 +411,7 @@ namespace Smart_Employee_Management_System.Migrations
 
                     b.HasIndex("WorkerId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("Smart_Employee_Management_System.Models.Worker", b =>
@@ -449,7 +449,7 @@ namespace Smart_Employee_Management_System.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Workers");
+                    b.ToTable("Workers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

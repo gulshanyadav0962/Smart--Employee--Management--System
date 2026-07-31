@@ -1,11 +1,64 @@
 ﻿@model Smart_Employee_Management_System.ViewModels.DashboardVM
 
+
+
 @{
     ViewData["Title"] = "Dashboard";
 }
 
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+    .dashboard-card {
+        border: none;
+        border-radius: 18px;
+        transition: .35s;
+        overflow: hidden;
+    }
+
+        .dashboard-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,.20);
+        }
+
+    .gradient-blue {
+        background: linear-gradient(135deg,#007bff,#00c6ff);
+    }
+
+    .gradient-green {
+        background: linear-gradient(135deg,#28a745,#7bed9f);
+    }
+
+    .gradient-orange {
+        background: linear-gradient(135deg,#ff9800,#ffc107);
+    }
+
+    .gradient-red {
+        background: linear-gradient(135deg,#dc3545,#ff6b81);
+    }
+
+    .gradient-info {
+        background: linear-gradient(135deg,#17a2b8,#74c0fc);
+    }
+
+    .gradient-dark {
+        background: linear-gradient(135deg,#343a40,#000);
+    }
+
+    .dashboard-card i {
+        opacity: .25;
+        transition: .3s;
+    }
+
+    .dashboard-card:hover i {
+        transform: scale(1.2) rotate(10deg);
+        opacity: .4;
+    }
+
+    .card-body h2 {
+        font-weight: bold;
+    }
+</style>
 
 <div class="container-fluid mt-4">
 
@@ -20,8 +73,7 @@
 
         <div class="col-lg-4 col-md-6 mb-4">
 
-            <div class="card text-white bg-primary shadow">
-
+            <div class="card dashboard-card gradient-blue text-white shadow">
                 <div class="card-body">
 
                     <div class="d-flex justify-content-between">
@@ -48,8 +100,7 @@
 
         <div class="col-lg-4 col-md-6 mb-4">
 
-            <div class="card text-white bg-success shadow">
-
+            <div class="card dashboard-card gradient-green text-white shadow">
                 <div class="card-body">
 
                     <div class="d-flex justify-content-between">
@@ -76,8 +127,7 @@
 
         <div class="col-lg-4 col-md-6 mb-4">
 
-            <div class="card text-white bg-warning shadow">
-
+            <div class="card dashboard-card gradient-orange text-white shadow">
                 <div class="card-body">
 
                     <div class="d-flex justify-content-between">
@@ -104,8 +154,7 @@
 
         <div class="col-lg-4 col-md-6 mb-4">
 
-            <div class="card text-white bg-danger shadow">
-
+            <div class="card dashboard-card gradient-red text-white shadow">
                 <div class="card-body">
 
                     <div class="d-flex justify-content-between">
@@ -132,8 +181,7 @@
 
         <div class="col-lg-4 col-md-6 mb-4">
 
-            <div class="card text-white bg-info shadow">
-
+            <div class="card dashboard-card gradient-info text-white shadow">
                 <div class="card-body">
 
                     <div class="d-flex justify-content-between">
@@ -160,8 +208,7 @@
 
         <div class="col-lg-4 col-md-6 mb-4">
 
-            <div class="card text-white bg-dark shadow">
-
+            <div class="card dashboard-card gradient-dark text-white shadow">
                 <div class="card-body">
 
                     <div class="d-flex justify-content-between">
@@ -540,6 +587,30 @@
         }]
 
         }
+
+        });
+
+                document.querySelectorAll(".card h2").forEach(card=>{
+
+        let end=parseInt(card.innerText.replace(/[^0-9]/g,''))||0;
+
+        let start=0;
+
+        let speed=Math.max(20,1500/end);
+
+        let counter=setInterval(()=>{
+
+        start++;
+
+        card.innerText=start;
+
+        if(start>=end){
+
+        clearInterval(counter);
+
+        }
+
+        },speed);
 
         });
 

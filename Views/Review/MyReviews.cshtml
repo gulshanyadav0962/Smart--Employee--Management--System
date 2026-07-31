@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Smart_Employee_Management_System.Models.Review>
+
+@{
+    ViewData["Title"] = "My Reviews";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+            <h3>My Reviews</h3>
+        </div>
+
+        <div class="card-body">
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info">
+                    You have not submitted any reviews yet.
+                </div>
+            }
+            else
+            {
+                <table class="table table-bordered table-striped">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Worker</th>
+                            <th>Rating</th>
+                            <th>Comment</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    @item.Worker?.FullName
+                                </td>
+
+                                <td>
+                                    @for (int i = 1; i <= item.Rating; i++)
+                                    {
+                                        <span class="text-warning fs-5">★</span>
+                                    }
+                                </td>
+
+                                <td>
+                                    @item.Comment
+                                </td>
+
+                                <td>
+                                    @item.ReviewDate.ToString("dd-MM-yyyy")
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+            }
+
+        </div>
+
+    </div>
+
+</div>
